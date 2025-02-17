@@ -75,7 +75,7 @@ export default function WebsocketClient() {
     audioContext.current = new (window.AudioContext || window.webkitAudioContext)();
 
     // Setup WebSocket connection
-    ws.current = new WebSocket('ws://35.202.156.40:8000/');
+    ws.current = new WebSocket('wss://35.202.156.40:8080/');
 
     ws.current.onopen = () => {
       console.log('WebSocket connected');
