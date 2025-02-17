@@ -1,0 +1,58 @@
+    <div className="max-w-4xl mx-auto p-8 text-center flex flex-col">
+      <div>
+        <h1 className="text-3xl font-bold mb-4">Voice Assistant</h1>
+        <p className="mb-8 text-lg">
+          Status: {isConnected ? 'Connected 🟢' : 'Disconnected 🔴'}
+        </p>
+        {/* Jukebox Container */}
+        <div
+          className={`relative w-48 h-12 mx-auto my-8 transition-all duration-300 ${(isRecording || isPlaying) && 'animate-bounce-vertical' 
+            }`}
+        >
+          {/* Status Lights */}
+          <div className="absolute left-1/2 -translate-x-1/2 flex gap-4">
+            <div
+              className={`w-5 h-5 rounded-full transition-all duration-300 ${isRecording ? 'bg-green-400 shadow-green-glow' : 'bg-red-400 shadow-red-glow'
+                }`}
+            />
+            <div
+              className={`w-5 h-5 rounded-full transition-all duration-300 ${isPlaying ? 'bg-green-400 shadow-green-glow' : 'bg-gray-300'
+                }`}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Conversation History */}
+      <div className="mt-8 p-6 bg-gray-50 rounded-xl">
+        <h2 className="text-xl font-semibold mb-4">Conversation</h2>
+        <div className="h-64 overflow-y-auto p-4 bg-white rounded-lg text-left space-y-3">
+          {messages.map((msg, index) => (
+            <div
+              key={index}
+              className={`p-3 rounded-lg ${msg.startsWith('User:')
+                  ? 'bg-yellow-100'
+                  : 'bg-blue-100'
+                }`}
+            >
+              {msg}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Custom Animation Style */}
+      <style jsx global>{`
+          @keyframes bounce-vertical {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+          }
+          .animate-bounce-vertical {
+            animation: bounce-vertical 0.8s infinite;
+          }
+          .shadow-green-glow {
+            box-shadow: 0 0 12px rgba(72, 187, 120, 0.5);
+          }
+        `}
+      </style>
+    </div>
